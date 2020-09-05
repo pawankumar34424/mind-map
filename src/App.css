@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  background-color: cornflowerblue;
 }
 
 .App-logo {
@@ -35,4 +36,28 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+
+.mind-elixir{
+  font-weight: 400 !important;
+  font-family: "Roboto,SegoeUI,Lato,sans-serif" !important;
+  line-height: 1.46429em !important;
+  font-size: 0.9375rem !important;
+  /* color: #fff !important; */
+  background-color: #303f9f !important;
+}
+
+tpc {
+  color: #ffffff !important;
+  padding: 0.2rem !important;
+  background-color: #303f9f !important;
+  border-radius: 0.2rem !important;
+  font-size: 0.9375rem !important;
+}
+
+tpc>input{
+  color: #303f9f !important;
+  background-color: #ffffff !important;
+  padding: 0.2rem !important;
 }

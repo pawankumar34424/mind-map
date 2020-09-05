@@ -10,10 +10,14 @@ function App() {
   const [selectedNodeId, setSelectedNodeId] = useState('root');
   
   useEffect(() => {
+
+    const existigData=localStorage.getItem("data") && JSON.parse(localStorage.getItem("data"))
+    const data=existigData || MindElixir.new("My Topic");
+
     const _mindElixir = new MindElixir({
       el: "#map",
       direction: MindElixir.LEFT,
-      data: MindElixir.new("new topic"),
+      data: data,
       draggable: false, // default true
       contextMenu: false, // default true
       toolBar: false, // default true
@@ -27,7 +31,7 @@ function App() {
     })
 
     _mindElixir.bus.addListener('operation', operation => {
-      console.log(operation)
+      // console.log(operation)
       /*if(operation.name==='beginEdit'){
         operation.obj['style']= {color: "#ecf0f1", fontSize: "24", background: "#2980b9"}
       }*/
@@ -49,11 +53,14 @@ function App() {
   const addNewChild=()=>{
     const selectedNode=E(selectedNodeId);
     mindElixir.addChild(selectedNode)
-    console.log(mindElixir,mindElixir.getAllData())
+    console.log(mindElixir)
     const { history } = mindElixir;
     const { obj } = history[history.length-1];
-    obj['style']= {color: "#ecf0f1", fontSize: "24", background: "#2980b9"};
-    mindElixir.updateNodeStyle(obj);
+    //obj['style']= {color: "#ecf0f1", fontSize: "24", background: "#2980b9"};
+    //mindElixir.updateNodeStyle(obj);
+
+    const data =mindElixir.getAllData();
+    localStorage.setItem("data",JSON.stringify(data))
   }
  
   const deleteSelected=()=>{
@@ -61,6 +68,7 @@ function App() {
     mindElixir.removeNode(selectedNode)
     setSelectedNodeId(null)
   }
+  console.log("mindElixir",mindElixir);
   return (
     <div className="App">
         <button onClick={()=>addNewChild()}>Add New Child</button>
